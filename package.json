@@ -1,0 +1,134 @@
+{
+  "name": "yoyo-boilerplate",
+  "version": "1.0.0",
+  "description": "A simple yoyo boilerplate",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node_modules/.bin/webpack-dev-server --config ./internals/webpack/webpack.config.js",
+    "build": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack --config ./internals/webpack/webpack.config.js",
+    "build:stats": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack --config ./internals/webpack/webpack.config.js --progress --profile --json > dist/stats.json",
+    "surge": "npm run build && cp index.html 200.html && surge --domain https://yoyo-boilerplate.surge.sh && rm 200.html",
+    "lint": "npm run lint:js",
+    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern **/**.min.js",
+    "lint:js": "npm run lint:eslint -- . ",
+    "lint:staged": "lint-staged",
+    "test": "mocha src/**/*test.*.js -R spec --timeout 2000000 --compilers js:babel-core/register --require babel-polyfill"
+  },
+  "engines": {
+    "npm": ">=3",
+    "node": ">=6.5.0"
+  },
+  "keywords": [
+    "yoyo",
+    "boilerplate"
+  ],
+  "author": "Nick Dodson",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      [
+        "es2015",
+        {
+          "modules": false
+        }
+      ],
+      "stage-0"
+    ],
+    "plugins": [
+      "transform-async-to-generator",
+      "transform-es2015-modules-commonjs"
+    ]
+  },
+  "dependencies": {
+    "node-polyglot": "2.2.2",
+    "redux": "3.6.0",
+    "redux-logic": "0.11.4",
+    "reselect": "2.5.4",
+    "seamless-immutable": "7.0.1",
+    "sheet-router": "4.2.1",
+    "styled-elements": "1.0.7",
+    "yo-yo": "1.4.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.22.2",
+    "babel-core": "6.22.1",
+    "babel-eslint": "7.1.1",
+    "babel-loader": "6.2.10",
+    "babel-plugin-transform-async-to-generator": "6.22.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.22.0",
+    "babel-polyfill": "6.22.0",
+    "babel-preset-es2015": "6.22.0",
+    "babel-preset-stage-0": "6.22.0",
+    "babel-register": "6.22.0",
+    "chai": "3.5.0",
+    "copy-webpack-plugin": "4.0.1",
+    "cross-env": "3.1.4",
+    "eslint": "3.14.1",
+    "eslint-config-airbnb": "14.0.0",
+    "eslint-import-resolver-webpack": "0.8.1",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "3.0.2",
+    "eslint-plugin-react": "6.9.0",
+    "json-loader": "0.5.4",
+    "lint-staged": "3.3.0",
+    "mocha": "3.2.0",
+    "mocha-babel": "3.0.3",
+    "pre-commit": "1.2.2",
+    "webpack": "2.2.0",
+    "webpack-dev-server": "2.2.1"
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "env": {
+      "node": true,
+      "mocha": true,
+      "es6": true
+    },
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": "./internals/webpack/webpack.config.js"
+        }
+      }
+    },
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "rules": {
+      "import/prefer-default-export": 0,
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": [
+            "**/test.*.js",
+            "**/*.spec.js"
+          ]
+        }
+      ],
+      "import/no-unresolved": 2,
+      "comma-dangle": [
+        2,
+        "always-multiline"
+      ],
+      "indent": [
+        2,
+        2,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "no-console": 1,
+      "max-len": 0,
+      "prefer-template": 2,
+      "no-use-before-define": 0,
+      "newline-per-chained-call": 0,
+      "arrow-body-style": [
+        2,
+        "as-needed"
+      ]
+    }
+  },
+  "pre-commit": "build"
+}
