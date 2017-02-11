@@ -1,4 +1,4 @@
-import yo from 'yo-yo';
+import yo from 'fro-yo';
 import styled from 'styled-elements';
 
 const Wrapper = styled.div`
@@ -7,7 +7,9 @@ const Wrapper = styled.div`
 `;
 
 export default function NotFound() {
-  return Wrapper(yo`
+  return yo`
+    <Wrapper>
       <h2>Page Not Found</h2>
-  `);
+    </Wrapper>
+  `;
 }

@@ -1,4 +1,4 @@
-import yo from 'yo-yo';
+import yo from 'fro-yo';
 
 export default function View2() {
   return yo`

@@ -1,4 +1,4 @@
-import yo from 'yo-yo';
+import yo from 'fro-yo';
 import styled from 'styled-elements';
 
 const Wrapper = styled.div`
@@ -12,7 +12,10 @@ const Wrapper = styled.div`
 `;
 
 export default function Footer() {
-  return Wrapper(
-    yo`<span>yoyo-boilerplate</span>`,
-  );
+  return yo`
+    <Wrapper>
+      <span>yoyo-boilerplate</span>
+      <span>2</span>
+    </Wrapper>
+  `;
 }

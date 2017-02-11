@@ -1,4 +1,4 @@
-import yo from 'yo-yo';
+import yo from 'fro-yo';
 import styled from 'styled-elements';
 
 import Header from 'components/Header';
@@ -8,10 +8,12 @@ const Wrapper = styled.div`
   font-family: Arial;
 `;
 
-export default function App(children) {
-  return Wrapper(
-      Header(),
-      yo`<div>${children}</div>`,
-      Footer(),
-    );
+export default function App(props) {
+  return yo`
+    <Wrapper>
+      <Header></Header>
+      ${props.children}
+      <Footer></Footer>
+    </Wrapper>
+  `;
 }

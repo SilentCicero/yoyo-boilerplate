@@ -1,45 +1,51 @@
-import yo from 'yo-yo';
+import yo from 'fro-yo';
 import styled, { css } from 'styled-elements';
 
 import { connect } from 'store';
 import { selectCurrentLocation } from './selectors';
 import { changeLocation } from './actions';
 
-const button = styled.button`
+const Wrapper = styled.div`
+  padding: 10px;
+`;
+
+const Button = styled.button`
   background: ${props => props.theme.primary};
-  color: #${props => props.theme.something};
+  color: #${props => (props.location === '/' ? 'red' : 'yellow')};
   border-radius: 2px;
   border: 2px solid ${props => props.theme.primary};
   padding: 17px;
   pointer: cursor;
 `;
 
-const small = css`
-  font-size: ${props => props.size}px;
+const Small = css`
+  font-size: ${props => props.size || 12}px;
 `;
 
 const NiceHeader = styled.h2`
-  ${small}
+  ${Small}
   color: #516da2;
 `;
 
-export function View1(params) {
+function View1(props) {
   return yo`
-    <div>
-      ${NiceHeader('View 1')}
+    <Wrapper>
+      <NiceHeader><i>View 1</i></NiceHeader>
 
       Username:
-      ${params.username}
+      ${(props.params || {}).username}
 
       Location:
-      ${this.props.location}
+      ${props.location}
 
       <a href="/orgs">orgs</a>
 
       <hr />
 
-      ${button({ onclick: this.props.changeLocation }, this.props)('Base Location')}
-    </div>
+      <Button onclick=${props.changeLocation}>
+        Base Location
+      </Button>
+    </Wrapper>
   `;
 }
 

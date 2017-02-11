@@ -46,7 +46,7 @@
     "reselect": "2.5.4",
     "seamless-immutable": "7.0.1",
     "sheet-router": "4.2.1",
-    "styled-elements": "1.0.7",
+    "styled-elements": "1.0.11",
     "yo-yo": "1.4.0"
   },
   "devDependencies": {
@@ -98,6 +98,7 @@
       "sourceType": "module"
     },
     "rules": {
+      "no-unused-vars": 0,
       "import/prefer-default-export": 0,
       "import/no-extraneous-dependencies": [
         "error",

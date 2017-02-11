@@ -2,6 +2,8 @@ var webpack = require('webpack'); // eslint-disable-line
 var env = process.env.NODE_ENV;   // eslint-disable-line
 var config; // eslint-disable-line
 
+var path = require('path'); // eslint-disable-line
+
 module.exports = config = { // eslint-disable-line
   entry: ['regenerator-runtime/runtime', './src/index.js'],
   output: {
@@ -12,7 +14,7 @@ module.exports = config = { // eslint-disable-line
     loaders: [{
       test: /\.js?$/,
       exclude: /(node_modules)/,
-      loader: 'babel-loader',
+      loader: 'babel-loader!./loaders/loader.js',
     },
     {
       test: /\.json$/,

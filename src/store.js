@@ -49,5 +49,5 @@ export function connect(mapStateToProps, mapDispatchToProps, customStore) {
     (mapDispatchToProps || objectNoop)((customStore || store).dispatch),
   );
 
-  return component => (...args) => component.call({ props: props() }, ...args);
+  return component => elProps => component(Object.assign({}, elProps, props()));
 }

@@ -1,18 +1,20 @@
+import yo from 'fro-yo';
 import sheetRouter from 'sheet-router';
+
 import App from 'containers/App';
 import View1 from 'containers/View1';
 import View2 from 'containers/View2';
 import NotFound from 'components/NotFound';
 
 export const router = sheetRouter({ default: '/404' }, [ // eslint-disable-line
-  ['/', () => View1({})],
-  ['/orgs', () => View2()],
-  ['/:username', params => View1(params)],
-  ['/404', () => NotFound()],
+  ['/', () => yo`<View1></View1>`],
+  ['/orgs', () => yo`<View2></View2>`],
+  ['/:username', params => yo`<View1 params=${params}></View1>`],
+  ['/404', () => yo`<NotFound></NotFound>`],
 ]);
 
 export function route(...args) {
-  return App(router(...args));
+  return yo`<App>${router(...args)}</App>`;
 }
 
 export function changeLocation(location) {

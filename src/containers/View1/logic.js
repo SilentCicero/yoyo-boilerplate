@@ -8,7 +8,6 @@ export default createLogic({
 
   async process({ getState, action, canceled$ }, dispatch, done) {
     const cool = await Promise.resolve('yes');
-    console.log(cool);
     done();
   },
 });
