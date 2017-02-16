@@ -46,7 +46,7 @@
     "reselect": "2.5.4",
     "seamless-immutable": "7.0.1",
     "sheet-router": "4.2.1",
-    "styled-elements": "1.0.11",
+    "styled-elements": "1.0.13",
     "yo-yo": "1.4.0"
   },
   "devDependencies": {

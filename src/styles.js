@@ -14,7 +14,7 @@ injectGlobal`
   }
 
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font: normal normal normal normal 15px / 21.4286px "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
   }
 
   #app {

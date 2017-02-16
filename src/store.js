@@ -44,10 +44,10 @@ export function objectNoop() {
 }
 
 export function connect(mapStateToProps, mapDispatchToProps, customStore) {
-  const props = () => Object.assign({},
-    (mapStateToProps || objectNoop)((customStore || store).getState()),
-    (mapDispatchToProps || objectNoop)((customStore || store).dispatch),
+  const props = objProps => Object.assign({},
+    (mapStateToProps || objectNoop)((customStore || store).getState(), objProps),
+    (mapDispatchToProps || objectNoop)((customStore || store).dispatch, objProps),
   );
 
-  return component => elProps => component(Object.assign({}, elProps, props()));
+  return component => elProps => component(Object.assign({}, elProps, props(elProps)));
 }
