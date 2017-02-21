@@ -1,0 +1,23 @@
+import yo from 'fro-yo';
+{{#if wantStyled}}
+import styled from 'styled-elements';
+{{/if}}
+
+{{#if wantMessages}}
+import { t } from 'i18n';
+{{/if}}
+{{#if wantStyled}}
+
+const Wrapper = styled.div`
+  padding: 0px;
+`;
+{{/if}}
+
+export default function {{properCase name}}() {
+  return yo`
+    {{#if wantStyled}}<Wrapper>{{else}}<div>{{/if}}{{#if wantMessages}}
+      ${t('{{properCase name}}.title')}{{/if}}
+      Hello world.
+    {{#if wantStyled}}</Wrapper>{{else}}</div>{{/if}}
+  `;
+}

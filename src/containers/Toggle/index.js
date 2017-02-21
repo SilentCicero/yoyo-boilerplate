@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
 `;
 
 function Toggle(props) {
-  return yo`<Wrapper status=${props.status}>
+  return yo`<Wrapper props=${props}>
     ${props.children}
   </Wrapper>`;
 }

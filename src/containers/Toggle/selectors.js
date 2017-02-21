@@ -1,7 +1,7 @@
 import Immutable from 'seamless-immutable';
 import { createSelector } from 'reselect';
 
-import { CLOSED_STATUS } from './constants';
+import { CLOSED_STATUS, OPEN_STATUS } from './constants';
 
 export const nullToggleSelection = Immutable({
   status: CLOSED_STATUS,
@@ -14,4 +14,9 @@ export const selectToggle = (state, props) => selectToggles(state)[props.name] |
 export const selectToggleStatus = createSelector(
   selectToggle,
   toggleState => toggleState.status,
+);
+
+export const selectToggleStatusInverse = createSelector(
+  selectToggle,
+  toggleState => (toggleState.status === OPEN_STATUS ? CLOSED_STATUS : OPEN_STATUS),
 );

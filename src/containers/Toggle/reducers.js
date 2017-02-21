@@ -1,7 +1,7 @@
 import Immutable from 'seamless-immutable';
 
 import { OPEN_TOGGLE, CLOSE_TOGGLE, TOGGLE_TOGGLE, OPEN_STATUS, CLOSED_STATUS } from './constants';
-import { selectToggleStatus } from './selectors';
+import { selectToggleStatusInverse } from './selectors';
 
 const togglesInitialState = Immutable({});
 
@@ -23,7 +23,7 @@ export default function togglesReducer(state = togglesInitialState, action) {
     case TOGGLE_TOGGLE:
       return state.merge({
         [action.name]: {
-          status: (selectToggleStatus(state, action) === OPEN_STATUS ? CLOSED_STATUS : OPEN_STATUS),
+          status: selectToggleStatusInverse(state, action),
         },
       });
     default:

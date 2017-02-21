@@ -1,0 +1,39 @@
+import yo from 'fro-yo';
+{{#if wantStyled}}
+import styled from 'styled-elements';
+{{/if}}
+
+{{#if wantMessages}}
+import { t } from 'i18n';
+{{/if}}
+{{#if wantActionsAndReducer}}
+import { connect } from 'store';
+import { selector{{properCase name}} } from './selectors';
+{{/if}}
+
+{{#if wantStyled}}
+export const Wrapper = styled.div`
+  padding: 0px;
+`;
+{{/if}}
+
+{{#unless wantActionsAndReducer}}export default {{/unless}}function {{properCase name}}(props) {
+  return yo`{{#if wantStyled}}<Wrapper>{{else}}<div>{{/if}}
+    {{#if wantMessages}}${t('{{properCase name}}.title')} <br />{{/if}}
+    ${props.children}
+  {{#if wantStyled}}</Wrapper>{{else}}</div>{{/if}}`;
+}
+
+{{#if wantActionsAndReducer}}
+export function mapStateToProps(state) {
+  return {
+  };
+}
+
+export function mapDispatchToProps(dispatch) {
+  return {
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)({{properCase name}});
+{{/if}}

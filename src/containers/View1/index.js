@@ -1,11 +1,13 @@
 import yo from 'fro-yo';
 import styled, { css } from 'styled-elements';
 
+import Grid from 'components/Grid';
+import Col from 'components/Col';
 import Toggle from 'containers/Toggle';
 import { openToggle, closeToggle, toggleToggle } from 'containers/Toggle/actions';
 
 import { connect } from 'store';
-import { selectCurrentLocation } from './selectors';
+import { selectCurrentLocation, selectUsername } from './selectors';
 import { changeLocation } from './actions';
 
 const Wrapper = styled.div`
@@ -35,26 +37,36 @@ function View1(props) {
     <Wrapper>
       <NiceHeader><i>View 1</i></NiceHeader>
 
-      <Toggle name="nickysToggle"><span>Nick</span><span>Cool!</span></Toggle>
-      <Toggle name="nickysToggle2">Nick!</Toggle>
+      <Grid spaced=1>
+        <Col>
+          <Toggle name="nickysToggle"><span>Nick</span><span>Cool!</span></Toggle>
+          <button onclick=${props.closeToggle('nickysToggle')}>Close!</button>
+          <button onclick=${props.openToggle('nickysToggle')}>Open!</button>
+          <button onclick=${props.toggleToggle('nickysToggle')}>Toggle!</button>
+        </Col>
 
-      <button onclick=${props.closeToggle('nickysToggle')}>Close!</button>
-      <button onclick=${props.openToggle('nickysToggle')}>Open!</button>
-      <button onclick=${props.toggleToggle('nickysToggle')}>Toggle!</button>
+        <Col>
+          <Toggle name="nickysToggle2">Nick!</Toggle>
+          <button onclick=${props.closeToggle('nickysToggle2')}>Close!</button>
+          <button onclick=${props.openToggle('nickysToggle2')}>Open!</button>
+          <button onclick=${props.toggleToggle('nickysToggle2')}>Toggle!</button>
+        </Col>
 
-      <button onclick=${props.closeToggle('nickysToggle2')}>Close!</button>
-      <button onclick=${props.openToggle('nickysToggle2')}>Open!</button>
-      <button onclick=${props.toggleToggle('nickysToggle2')}>Toggle!</button>
+        <Col>
+          Username:
+          <br />
+          ${selectUsername(props)}
+        </Col>
 
-      Username:
-      ${(props.params || {}).username}
-
-      Location:
-      ${props.location}
-
-      <a href="/orgs">orgs</a>
+        <Col>
+          Location: <br />
+          ${props.location}
+        </Col>
+      </Grid>
 
       <hr />
+
+      <a href="/orgs">orgs</a>
 
       <Button location=${props.location} onclick=${props.changeLocation}>
         Base Location

@@ -14,7 +14,7 @@ module.exports = config = { // eslint-disable-line
     loaders: [{
       test: /\.js?$/,
       exclude: /(node_modules)/,
-      loader: 'babel-loader!./loaders/loader.js',
+      loader: 'babel-loader!./internals/loaders/loader.js',
     },
     {
       test: /\.json$/,

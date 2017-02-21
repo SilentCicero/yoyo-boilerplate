@@ -1,0 +1,15 @@
+import Immutable from 'seamless-immutable';
+
+import { {{spaceListComma constants}} } from './constants';
+
+const {{camelCase name}}InitialState = Immutable({});
+
+export default function {{camelCase name}}Reducer(state = {{camelCase name}}InitialState, action) {
+  switch (action.type) {
+    /* istanbul ignore next */
+    case 'CASE_1':
+      return state.merge({});
+    default:
+      return state;
+  }
+}

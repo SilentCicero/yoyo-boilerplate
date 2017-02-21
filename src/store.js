@@ -4,6 +4,7 @@ import { createLogicMiddleware } from 'redux-logic';
 
 import logic from 'logic';
 import { createReducer } from 'reducers';
+import { objectNoop } from 'utils/noop';
 
 const initialState = {};
 
@@ -38,10 +39,6 @@ export function configureStore(initialState = {}) { // eslint-disable-line
 }
 
 export const store = configureStore(initialState);
-
-export function objectNoop() {
-  return Object.assign({});
-}
 
 export function connect(mapStateToProps, mapDispatchToProps, customStore) {
   const props = objProps => Object.assign({},

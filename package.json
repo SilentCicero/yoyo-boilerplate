@@ -12,6 +12,7 @@
     "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern **/**.min.js",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
+    "generate": "plop --plopfile internals/generators/index.js",
     "test": "mocha src/**/*test.*.js -R spec --timeout 2000000 --compilers js:babel-core/register --require babel-polyfill"
   },
   "engines": {
@@ -46,14 +47,13 @@
     "reselect": "2.5.4",
     "seamless-immutable": "7.0.1",
     "sheet-router": "4.2.1",
-    "styled-elements": "1.0.13",
+    "styled-elements": "1.0.14",
     "yo-yo": "1.4.0"
   },
   "devDependencies": {
     "babel-cli": "6.22.2",
     "babel-core": "6.22.1",
     "babel-eslint": "7.1.1",
-    "regenerator-runtime": "0.10.1",
     "babel-loader": "6.2.10",
     "babel-plugin-transform-async-to-generator": "6.22.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.22.0",
@@ -74,7 +74,9 @@
     "lint-staged": "3.3.0",
     "mocha": "3.2.0",
     "mocha-babel": "3.0.3",
+    "plop": "^1.7.4",
     "pre-commit": "1.2.2",
+    "regenerator-runtime": "0.10.1",
     "webpack": "2.2.0",
     "webpack-dev-server": "2.2.1"
   },
