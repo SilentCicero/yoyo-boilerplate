@@ -21,6 +21,10 @@ const Button = styled.button`
   border: 2px solid ${props => props.theme.primary};
   padding: 17px;
   pointer: cursor;
+
+  @media (min-width: 400px) {
+    color: lightblue;
+  }
 `;
 
 const Small = css`
@@ -37,8 +41,8 @@ function View1(props) {
     <Wrapper>
       <NiceHeader><i>View 1</i></NiceHeader>
 
-      <Grid spaced=1>
-        <Col>
+      <Grid justify='center' align='center'>
+        <Col sm-width='50%'>
           <Toggle name="nickysToggle"><span>Nick</span><span>Cool!</span></Toggle>
           <button onclick=${props.closeToggle('nickysToggle')}>Close!</button>
           <button onclick=${props.openToggle('nickysToggle')}>Open!</button>

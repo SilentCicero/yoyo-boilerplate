@@ -4,7 +4,9 @@ import styled from 'styled-elements';
 
 export const css = styled.css`
   display: flex;
-  ${props => (props.spaced ? 'justify-content: space-between;' : '')}
+  justify-content: ${props => (props.justify ? props.justify : 'inherit')};
+  flex-wrap: ${props => (props.wrap ? props.wrap : 'nowrap')};
+  align-items: ${props => (props.align ? props.align : 'inherit')};
 
   @media (max-width: 400px) {
     display: block;

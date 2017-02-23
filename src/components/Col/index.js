@@ -3,11 +3,9 @@ import styled from 'styled-elements';
 
 
 export const css = styled.css`
-  flex: 1;
+  flex: ${props => (props.flex ? props.flex : 1)};
 
-  ${props => (props.width ? `width: ${props.width};` : '')}
-  ${props => (props.maxWidth ? `max-width: ${props.maxWidth};` : '')}
-  ${props => (props.minWidth ? `min-width: ${props.minWidth};` : '')}
+  ${props => (props.basis ? `flex-basis: ${props.basis};` : '')}
 `;
 
 export const Wrapper = styled.div`

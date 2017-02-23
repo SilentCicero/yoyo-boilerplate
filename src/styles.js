@@ -7,6 +7,11 @@ setTheme({
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
+  /* normalize lol */
+  * {
+  box-sizing: border-box;
+  }
+
   html,
   body {
     height: 100%;
@@ -15,12 +20,6 @@ injectGlobal`
 
   body {
     font: normal normal normal normal 15px / 21.4286px "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
-  }
-
-  #app {
-    background-color: #fafafa;
-    min-height: 100%;
-    min-width: 100%;
   }
 
   p,

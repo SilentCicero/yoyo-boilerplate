@@ -1,4 +1,6 @@
 var webpack = require('webpack'); // eslint-disable-line
+var HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line
+var OfflinePlugin = require('offline-plugin'); // eslint-disable-line
 var env = process.env.NODE_ENV;   // eslint-disable-line
 var config; // eslint-disable-line
 
@@ -19,6 +21,10 @@ module.exports = config = { // eslint-disable-line
     {
       test: /\.json$/,
       loader: 'json-loader',
+    },
+    {
+      test: /\.css$/,
+      loader: 'css-loader',
     }],
   },
   devServer: {
@@ -28,7 +34,7 @@ module.exports = config = { // eslint-disable-line
     },
   },
   resolve: {
-    modules: ['src', 'node_modules'],
+    modules: ['src', 'node_modules', 'sanitize.css'],
     extensions: [
       '.js',
     ],
