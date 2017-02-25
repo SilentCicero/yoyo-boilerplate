@@ -1,10 +1,14 @@
 import yo from 'fro-yo';
 import styled, { css } from 'styled-elements';
 
+import Meta from 'components/Meta';
 import Grid from 'components/Grid';
 import Col from 'components/Col';
 import Toggle from 'containers/Toggle';
 import { openToggle, closeToggle, toggleToggle } from 'containers/Toggle/actions';
+
+import { selectInputValue, selectForm } from 'containers/Forms/selectors';
+import { Input, Textarea, Select, Checkbox } from 'containers/Forms';
 
 import { connect } from 'store';
 import { selectCurrentLocation, selectUsername } from './selectors';
@@ -39,7 +43,24 @@ const NiceHeader = styled.h2`
 function View1(props) {
   return yo`
     <Wrapper>
+      <Meta title=${`View 1 | ${props.form.email}`}></Meta>
+
       <NiceHeader><i>View 1</i></NiceHeader>
+
+      <Input id='email' type='text' value=${props.form.email}></Input>
+
+      <Textarea id='description' value=${props.form.description}></Textarea>
+
+      <Select id='favoriteDrink' autoselect=1>
+        <option value='organe' selected>Orange Juice</option>
+        <option value='lemon'>Lemon Aid</option>
+        <option value='pineapple'>Pineapple Juice</option>
+      </Select>
+
+      <Input type='checkbox' id='somethingGood' ${props.form.somethingGood ? 'checked' : ''}></Checkbox>
+
+      <h4>Selected Email</h4>
+      ${props.form.email === 'nick@dodson.com' ? 'Bad email' : props.form.email}
 
       <Grid justify='center' align='center'>
         <Col sm-width='50%'>
@@ -82,6 +103,11 @@ function View1(props) {
 export function mapStateToProps(state) {
   return {
     location: selectCurrentLocation(state),
+    form: selectForm(state, ['email', 'description', 'favoriteDrink', 'somethingGood']),
+    email: selectInputValue(state, 'email'),
+    description: selectInputValue(state, 'description'),
+    favoriteDrink: selectInputValue(state, 'favoriteDrink'),
+    somethingGood: selectInputValue(state, 'somethingGood'),
   };
 }
 

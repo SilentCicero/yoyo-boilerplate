@@ -2,6 +2,7 @@ import Immutable from 'seamless-immutable';
 import { combineReducers } from 'redux';
 
 import togglesReducer from 'containers/Toggle/reducers';
+import formsReducer from 'containers/Forms/reducer';
 
 // i18n state
 const languageState = Immutable({
@@ -39,6 +40,7 @@ function routeReducer(state = routeInitialState, action) {
 
 export function createReducer(asyncReducers) { // eslint-disable-line
   return combineReducers({
+    forms: formsReducer,
     language: languageReducer,
     route: routeReducer,
     toggles: togglesReducer,

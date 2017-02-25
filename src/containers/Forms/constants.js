@@ -1,0 +1,1 @@
+export const CHANGE_VALUE = 'INPUT_CHANGE_VALUE';

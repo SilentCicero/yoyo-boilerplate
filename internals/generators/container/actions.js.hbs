@@ -2,6 +2,8 @@ import { {{spaceListComma constants}} } from './constants';
 
 {{#spaceList actions}}
 export function {{this}}() {
-  return { type: 'TYPE' };
+  return {
+    type: 'TYPE',
+  };
 }
 {{/spaceList}}
