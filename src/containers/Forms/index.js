@@ -3,20 +3,27 @@ import yo from 'fro-yo';
 import { connect } from 'store';
 import { changeValue } from './actions';
 import { selectValue } from './selectors';
+import { assignValidators } from './validators';
 
 function noChildren(props) {
   return Object.assign({}, props, { children: '' });
 }
 
 function InputWrapper(props) {
+  assignValidators(props);
+
   return yo`<span><input ${noChildren(props)} /></span>`;
 }
 
 function TextareaWrapper(props) {
+  assignValidators(props);
+
   return yo`<textarea ${noChildren(props)} />${props.value || ''}</textarea>`;
 }
 
 function SelectWrapper(props) {
+  assignValidators(props);
+
   return yo`<span><select ${noChildren(props)}>${props.children.map((c) => {
     if (typeof props.autoselect !== 'undefined' && c.value === props.selected) {
       return yo`<option value=${c.value} selected="selected">${c.innerHTML}</option>`;

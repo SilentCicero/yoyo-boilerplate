@@ -4,11 +4,15 @@ import styled, { css } from 'styled-elements';
 import Meta from 'components/Meta';
 import Grid from 'components/Grid';
 import Col from 'components/Col';
+import Button from 'components/Button';
+import Alert from 'components/Alert';
 import Toggle from 'containers/Toggle';
+import Padding from 'components/Padding';
 import { openToggle, closeToggle, toggleToggle } from 'containers/Toggle/actions';
 
-import { selectInputValue, selectForm } from 'containers/Forms/selectors';
+import { selectFormValues, selectForm, selectLatestFormError } from 'containers/Forms/selectors';
 import { Input, Textarea, Select, Checkbox } from 'containers/Forms';
+import { maxLength, minLength, required } from 'containers/Forms/validators';
 
 import { connect } from 'store';
 import { selectCurrentLocation, selectUsername } from './selectors';
@@ -16,19 +20,6 @@ import { changeLocation } from './actions';
 
 const Wrapper = styled.div`
   padding: 10px;
-`;
-
-const Button = styled.button`
-  background: ${props => props.theme.primary};
-  color: ${props => (props.location === '/' ? 'white' : 'yellow')};
-  border-radius: 2px;
-  border: 2px solid ${props => props.theme.primary};
-  padding: 17px;
-  pointer: cursor;
-
-  @media (min-width: 400px) {
-    color: lightblue;
-  }
 `;
 
 const Small = css`
@@ -43,47 +34,56 @@ const NiceHeader = styled.h2`
 function View1(props) {
   return yo`
     <Wrapper>
-      <Meta title=${`View 1 | ${props.form.email}`}></Meta>
+      <Meta title=${`View 1 | ${props.form.email.value}`}></Meta>
 
-      <NiceHeader><i>View 1</i></NiceHeader>
+      <Padding xs-bottom='50px'>
+        <NiceHeader><i>View 1</i></NiceHeader>
+      </Padding>
 
-      <Input id='email' type='text' value=${props.form.email}></Input>
+      <Input id='email' form='f1' type='text' value=${props.form.email.value} validators=${[minLength(4), maxLength(12)]}></Input>
 
-      <Textarea id='description' value=${props.form.description}></Textarea>
+      <Textarea id='description' form='f1' value=${props.form.description.value} validators=${required}></Textarea>
 
-      <Select id='favoriteDrink' autoselect=1>
+      <Select id='favoriteDrink' form='f1' autoselect=1 validators=${required}>
         <option value='organe' selected>Orange Juice</option>
         <option value='lemon'>Lemon Aid</option>
         <option value='pineapple'>Pineapple Juice</option>
       </Select>
 
-      <Input type='checkbox' id='somethingGood' ${props.form.somethingGood ? 'checked' : ''}></Checkbox>
+      <Alert>
+        <h4>Nicks error</h4>
+        <p>Cool, this is great.</p>
+      </Alert>
+
+      <Input type='checkbox' form='f1' id='somethingGood' ${props.form.somethingGood.value ? 'checked' : ''}></Input>
+
+      ${props.form.email.error ? yo`<span> Error: ${props.form.email.error} </span>` : ''}
 
       <h4>Selected Email</h4>
-      ${props.form.email === 'nick@dodson.com' ? 'Bad email' : props.form.email}
+      ${props.form.email.value === 'nick@dodson.com' ? 'Bad email' : props.form.email.value}
 
-      <Grid justify='center' align='center'>
-        <Col sm-width='50%'>
+      <Grid xs-justify='center' xs-align='center'>
+        <Col xs-flex=2 sm-flex=3 md-flex=3>
           <Toggle name="nickysToggle"><span>Nick</span><span>Cool!</span></Toggle>
           <button onclick=${props.closeToggle('nickysToggle')}>Close!</button>
           <button onclick=${props.openToggle('nickysToggle')}>Open!</button>
           <button onclick=${props.toggleToggle('nickysToggle')}>Toggle!</button>
         </Col>
 
-        <Col>
+        <Col xs-flex=1>
           <Toggle name="nickysToggle2">Nick!</Toggle>
           <button onclick=${props.closeToggle('nickysToggle2')}>Close!</button>
           <button onclick=${props.openToggle('nickysToggle2')}>Open!</button>
           <button onclick=${props.toggleToggle('nickysToggle2')}>Toggle!</button>
         </Col>
 
-        <Col>
+        <Col xs-flex=1 xs-basis='25%'>
           Username:
           <br />
           ${selectUsername(props)}
         </Col>
 
-        <Col>
+        <Col xs-flex=1>
           Location: <br />
           ${props.location}
         </Col>
@@ -94,20 +94,19 @@ function View1(props) {
       <a href="/orgs">orgs</a>
 
       <Button location=${props.location} onclick=${props.changeLocation}>
-        Base Location
+        Primary
       </Button>
     </Wrapper>
   `;
 }
 
+const formIds = ['email', 'description', 'favoriteDrink', 'somethingGood'];
+
 export function mapStateToProps(state) {
   return {
     location: selectCurrentLocation(state),
-    form: selectForm(state, ['email', 'description', 'favoriteDrink', 'somethingGood']),
-    email: selectInputValue(state, 'email'),
-    description: selectInputValue(state, 'description'),
-    favoriteDrink: selectInputValue(state, 'favoriteDrink'),
-    somethingGood: selectInputValue(state, 'somethingGood'),
+    form: selectForm(state, formIds),
+    latestError: selectLatestFormError(state, formIds),
   };
 }
 
