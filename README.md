@@ -8,7 +8,7 @@ yoyo + redux = heaven.
  - Fast yoyo templating, dom-diffing
  - Single immutable state (via `seamless-immutable`)
  - Styled-elements (based on styled-components)
- - Redux + Selectors + Redux Logic (for side-effects)
+ - State: Redux + Selectors + Redux-Logic (for side-effects)
  - Full i18n support (node-polyglot)
  - Webpack + Webpack-Dev-Server environment
  - Container/Component philosophy
