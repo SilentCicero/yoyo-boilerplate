@@ -13,10 +13,6 @@ export const router = sheetRouter({ default: '/404' }, [ // eslint-disable-line
   ['/404', () => yo`<NotFound></NotFound>`],
 ]);
 
-export function route(...args) {
-  return yo`<App>${router(...args)}</App>`;
-}
-
 export function changeLocation(location) {
   return {
     type: 'LOCATION_CHANGE',

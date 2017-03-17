@@ -2,7 +2,7 @@ import yo from 'fro-yo';
 
 import { connect } from 'store';
 import { changeValue } from './actions';
-import { selectValue } from './selectors';
+import { selectInputValue } from './selectors';
 import { assignValidators } from './validators';
 
 function noChildren(props) {
@@ -44,7 +44,7 @@ export function mapKeyUpDispatchToProps(dispatch, mergeProps) {
 
 export function mapInputStateToProps(state, mergeProps) {
   return {
-    selected: selectValue(state, mergeProps),
+    selected: selectInputValue(state, mergeProps.form, mergeProps.id),
   };
 }
 

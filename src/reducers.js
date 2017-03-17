@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 
 import togglesReducer from 'containers/Toggle/reducers';
 import formsReducer from 'containers/Forms/reducer';
+import timeReducer from 'containers/Time/reducer';
 
 // i18n state
 const languageState = Immutable({
@@ -43,6 +44,7 @@ export function createReducer(asyncReducers) { // eslint-disable-line
     forms: formsReducer,
     language: languageReducer,
     route: routeReducer,
+    time: timeReducer,
     toggles: togglesReducer,
     ...asyncReducers,
   });

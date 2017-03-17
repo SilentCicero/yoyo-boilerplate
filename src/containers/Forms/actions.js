@@ -25,9 +25,9 @@ export function changeError(mergeProps, error) {
   };
 }
 
-function validateForm(ids) {
+function validateForm(form) {
   return {
     type: VALIDATE_FORM,
-    ids,
+    form,
   };
 }

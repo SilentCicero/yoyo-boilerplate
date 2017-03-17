@@ -8,9 +8,11 @@ import Button from 'components/Button';
 import Alert from 'components/Alert';
 import Toggle from 'containers/Toggle';
 import Padding from 'components/Padding';
-import { openToggle, closeToggle, toggleToggle } from 'containers/Toggle/actions';
 
-import { selectFormValues, selectForm, selectLatestFormError } from 'containers/Forms/selectors';
+import { openToggle, closeToggle, toggleToggle } from 'containers/Toggle/actions';
+import Time from 'containers/Time';
+
+import { selectInputValue, selectInputError } from 'containers/Forms/selectors';
 import { Input, Textarea, Select, Checkbox } from 'containers/Forms';
 import { maxLength, minLength, required } from 'containers/Forms/validators';
 
@@ -31,18 +33,24 @@ const NiceHeader = styled.h2`
   color: #516da2;
 `;
 
+const toggles = [];
+
+for (let i = 0; i < 10000; i += 1) {
+  toggles.push(i);
+}
+
 function View1(props) {
   return yo`
     <Wrapper>
-      <Meta title=${`View 1 | ${props.form.email.value}`}></Meta>
+      <Meta title=${`View 1 | ${props.email}`}></Meta>
 
       <Padding xs-bottom='50px'>
         <NiceHeader><i>View 1</i></NiceHeader>
       </Padding>
 
-      <Input id='email' form='f1' type='text' value=${props.form.email.value} validators=${[minLength(4), maxLength(12)]}></Input>
+      <Input id='email' form='f1' type='text' value=${props.email} validators=${[minLength(4), maxLength(12)]}></Input>
 
-      <Textarea id='description' form='f1' value=${props.form.description.value} validators=${required}></Textarea>
+      <Textarea id='description' form='f1' value=${props.description} validators=${required}></Textarea>
 
       <Select id='favoriteDrink' form='f1' autoselect=1 validators=${required}>
         <option value='organe' selected>Orange Juice</option>
@@ -55,12 +63,25 @@ function View1(props) {
         <p>Cool, this is great.</p>
       </Alert>
 
-      <Input type='checkbox' form='f1' id='somethingGood' ${props.form.somethingGood.value ? 'checked' : ''}></Input>
+      <Time></Time>
 
-      ${props.form.email.error ? yo`<span> Error: ${props.form.email.error} </span>` : ''}
+      <Input type='checkbox' form='f1' id='somethingGood' ${props.somethingGood ? 'checked' : ''}></Input>
+
+      ${props.emailError ? yo`<span> Error: ${props.emailError} </span>` : ''}
 
       <h4>Selected Email</h4>
-      ${props.form.email.value === 'nick@dodson.com' ? 'Bad email' : props.form.email.value}
+      ${props.email === 'nick@dodson.com' ? 'Bad email' : props.email}
+
+      ${[0].map(t => yo`
+        <div>
+          <div>
+            <Toggle name="nickysToggle-${t}"><span>Nick</span><span>Cool!</span></Toggle>
+            <button onclick=${props.closeToggle(`nickysToggle-${t}`)}>Close!</button>
+            <button onclick=${props.openToggle(`nickysToggle-${t}`)}>Open!</button>
+            <button onclick=${props.toggleToggle(`nickysToggle-${t}`)}>Toggle!</button>
+          </div>
+        </div>
+      `)}
 
       <Grid xs-justify='center' xs-align='center'>
         <Col xs-flex=2 sm-flex=3 md-flex=3>
@@ -91,6 +112,11 @@ function View1(props) {
 
       <hr />
 
+      <Time></Time>
+      <Time></Time>
+      <Time></Time>
+      <Time></Time>
+
       <a href="/orgs">orgs</a>
 
       <Button location=${props.location} onclick=${props.changeLocation}>
@@ -105,8 +131,10 @@ const formIds = ['email', 'description', 'favoriteDrink', 'somethingGood'];
 export function mapStateToProps(state) {
   return {
     location: selectCurrentLocation(state),
-    form: selectForm(state, formIds),
-    latestError: selectLatestFormError(state, formIds),
+    email: selectInputValue(state, 'f1', 'email'),
+    emailError: selectInputError(state, 'f1', 'email'),
+    description: selectInputValue(state, 'f1', 'description'),
+    somethingGood: selectInputValue(state, 'f1', 'somethingGood'),
   };
 }
 

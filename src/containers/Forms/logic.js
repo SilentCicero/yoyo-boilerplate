@@ -9,12 +9,12 @@ export default createLogic({
   latest: true,
 
   async process({ action }, dispatch, done) {
-    for (let v = 0; v < validators[action.id].length; v += 1) {
-      const errorValue = validators[action.id][v](action.value);
+    for (let v = 0; v < validators[action.form][action.id].length; v += 1) {
+      const errorValue = validators[action.form][action.id][v](action.value);
       const error = typeof (errorValue || {}).then === 'function' ? await errorValue : errorValue; // eslint-disable-line
 
       if (error) {
-        dispatch(changeError({ id: action.id }, error));
+        dispatch(changeError({ id: action.id, form: action.form }, error));
       }
     }
 
@@ -22,22 +22,7 @@ export default createLogic({
   },
 });
 
-export const formValidationLogic = createLogic({
-  type: VALIDATE_FORM,
-  latest: true,
-
-  async process({ getState, action }, dispatch, done) {
-    let count = 0;
-    const form = action.form;
-
-    Object.keys(validators[form]).forEach((input) => {
-      if (count === Object.keys(validators[form][input]).length) {
-        done();
-      }
-
-      count += 1;
-    });
-
-    dispatch(changeValue());
-  },
-});
+async function errorReturn(errorValue) {
+  const val = typeof (errorValue || {}).then === 'function' ? await errorValue : errorValue;
+  return val;
+}
