@@ -2,6 +2,8 @@
 
 yoyo + redux = heaven.
 
+A boilerplate for those who want to live in the mountains alone.. isolated from everyone... in a crazy low-dependency lifestyle...
+
 ## Features
 
  - Offline/Client-Side First
