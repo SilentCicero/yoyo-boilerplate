@@ -4,6 +4,20 @@ yoyo + redux = heaven.
 
 A boilerplate for those who want to live in the mountains alone.. isolated from everyone... in a crazy low-dependency lifestyle...
 
+## Install
+
+```
+git clone http://github.com/silentcicero/yoyo-boilerplate
+cd yoyo-boilerplate
+npm install
+```
+
+## Start
+
+```
+npm start
+```
+
 ## Features
 
  - Offline/Client-Side First
@@ -29,3 +43,23 @@ A boilerplate for those who want to live in the mountains alone.. isolated from 
  - `<MyComponent></MyComponent>` not `<MyComponent />`.. but not for long (if `hyperx` changes)
  - No internal component lifecyles (all redux/single state/stateless functions)
  - No react ecosystem
+
+ ## Build
+
+```
+npm run build
+```
+
+ ## Test
+
+```
+npm run test
+```
+
+## Surge
+
+Change surge address in package.json..
+
+```
+npm run surge
+```

@@ -1,4 +1,4 @@
-import { CHANGE_VALUE, CHANGE_ERROR, VALIDATE_FORM } from './constants';
+import { CHANGE_VALUE, CHANGE_ERROR, VALIDATE_FORM, FORM_VALID } from './constants';
 
 export function changeValue(e, mergeProps) {
   const nullMethod = () => {};
@@ -25,9 +25,16 @@ export function changeError(mergeProps, error) {
   };
 }
 
-function validateForm(form) {
+export function validateForm(form) {
   return {
     type: VALIDATE_FORM,
+    form,
+  };
+}
+
+export function formValid(form) {
+  return {
+    type: FORM_VALID,
     form,
   };
 }

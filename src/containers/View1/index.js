@@ -12,8 +12,9 @@ import Padding from 'components/Padding';
 import { openToggle, closeToggle, toggleToggle } from 'containers/Toggle/actions';
 import Time from 'containers/Time';
 
-import { selectInputValue, selectInputError } from 'containers/Forms/selectors';
+import { selectInputValue, selectInputError, selectFormValid } from 'containers/Forms/selectors';
 import { Input, Textarea, Select, Checkbox } from 'containers/Forms';
+import { validateForm } from 'containers/Forms/actions';
 import { maxLength, minLength, required } from 'containers/Forms/validators';
 
 import { connect } from 'store';
@@ -68,6 +69,10 @@ function View1(props) {
       <Input type='checkbox' form='f1' id='somethingGood' ${props.somethingGood ? 'checked' : ''}></Input>
 
       ${props.emailError ? yo`<span> Error: ${props.emailError} </span>` : ''}
+
+      <button onclick=${props.validateForm('f1')}>Validate Form</button>
+
+      ${props.formValid ? 'form is valid' : 'form is not valid'}
 
       <h4>Selected Email</h4>
       ${props.email === 'nick@dodson.com' ? 'Bad email' : props.email}
@@ -135,12 +140,14 @@ export function mapStateToProps(state) {
     emailError: selectInputError(state, 'f1', 'email'),
     description: selectInputValue(state, 'f1', 'description'),
     somethingGood: selectInputValue(state, 'f1', 'somethingGood'),
+    formValid: selectFormValid(state, 'f1'),
   };
 }
 
 export function mapDispatchToProps(dispatch) {
   return {
     changeLocation: () => dispatch(changeLocation('/')),
+    validateForm: form => () => dispatch(validateForm(form)),
     openToggle: name => () => dispatch(openToggle(name)),
     closeToggle: name => () => dispatch(closeToggle(name)),
     toggleToggle: name => () => dispatch(toggleToggle(name)),

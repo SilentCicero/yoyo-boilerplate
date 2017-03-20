@@ -1,3 +1,4 @@
 export const CHANGE_VALUE = 'INPUT_CHANGE_VALUE';
 export const CHANGE_ERROR = 'INPUT_CHANGE_ERROR';
 export const VALIDATE_FORM = 'INPUT_VALIDATE_FORM';
+export const FORM_VALID = 'FORM_VALID';
